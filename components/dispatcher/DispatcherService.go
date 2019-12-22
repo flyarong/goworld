@@ -54,7 +54,7 @@ func (edi *entityDispatchInfo) dispatchPacket(pkt *netutil.Packet) error {
 			return nil
 		} else {
 			gwlog.Errorf("%s.dispatchPacket: packet queue too long, packet dropped", edi)
-			return errors.Errorf("%s: packet of entity %s is dropped", dispatcherService)
+			return errors.Errorf("%s: packet of entity dropped", dispatcherService)
 		}
 	} else {
 		// time to unblock
@@ -552,9 +552,6 @@ func (service *DispatcherService) chooseGameForBootEntity() *gameDispatchInfo {
 		gwlog.Errorf("%s chooseGameForBootEntity: no game", service)
 		return nil
 	}
-	gameid := service.bootGames[rand.Intn(len(service.bootGames))]
-	gdi := service.games[gameid]
-	return gdi
 }
 
 func (service *DispatcherService) handleDispatcherClientDisconnect(dcp *dispatcherClientProxy) {
